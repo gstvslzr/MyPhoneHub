@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mydevicelab/device-profile.schema.json",
+  "title": "MyDeviceLab device profile v1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "display_name", "family", "kind", "support_level", "label_note"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_]{1,63}$",
+      "description": "Stable unique key. User profiles with the same id override built-ins."
+    },
+    "display_name": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "family": { "enum": ["pixel", "galaxy", "generic", "iphone"] },
+    "kind": {
+      "enum": ["builtin_device", "custom_hardware", "viewport_preview"],
+      "description": "builtin_device = use Google's avdmanager device definition; custom_hardware = explicit hardware values on stock Android; viewport_preview = web viewport only, no app execution."
+    },
+    "support_level": { "enum": ["full", "approximation", "viewport_only"] },
+    "label_note": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Shown in the UI next to the device so the user knows what the profile is and is not."
+    },
+    "avd_device_id_candidates": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+$" },
+      "description": "Ordered avdmanager device ids. First one present in 'avdmanager list device -c' wins. Not verified until runtime."
+    },
+    "hardware": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["screen_width_px", "screen_height_px", "screen_diagonal_in", "ram_mb_device"],
+      "properties": {
+        "screen_width_px":  { "type": "integer", "minimum": 240, "maximum": 4096 },
+        "screen_height_px": { "type": "integer", "minimum": 320, "maximum": 4096 },
+        "screen_diagonal_in": { "type": "number", "exclusiveMinimum": 1, "maximum": 20 },
+        "physical_ppi_stated": {
+          "type": "number",
+          "description": "Vendor/retailer-stated ppi, if any. The app computes ppi itself; this is kept only for cross-checking."
+        },
+        "lcd_density": {
+          "enum": [120, 160, 213, 240, 280, 320, 360, 400, 420, 440, 480, 560, 640],
+          "description": "Android logical density bucket. If omitted, the app picks the bucket nearest the computed physical ppi."
+        },
+        "ram_mb_device": {
+          "type": "integer", "minimum": 512,
+          "description": "The real device's RAM. The emulator launch value is clamped to 1536-8192 MB (official -memory range)."
+        },
+        "internal_storage_mb": { "type": "integer", "minimum": 2048 },
+        "cpu_cores": { "type": "integer", "minimum": 1, "maximum": 16 },
+        "cameras": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "back":  { "type": "boolean" },
+            "front": { "type": "boolean" }
+          }
+        },
+        "orientations": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": { "enum": ["portrait", "landscape"] }
+        }
+      }
+    },
+    "defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "image_variant": { "enum": ["google_apis_playstore", "google_apis", "default"] },
+        "api_level_min": { "type": "integer", "minimum": 21 },
+        "sdcard_mb": { "type": "integer", "minimum": 0 },
+        "gpu_mode": { "enum": ["auto", "host", "swiftshader_indirect"] },
+        "netspeed": { "enum": ["gsm", "hscsd", "gprs", "edge", "umts", "hsdpa", "lte", "evdo", "full"] },
+        "netdelay": { "enum": ["gsm", "hscsd", "gprs", "edge", "umts", "hsdpa", "lte", "evdo", "none"] },
+        "timezone": { "type": "string", "pattern": "^[A-Za-z_]+(/[A-Za-z0-9_+-]+){1,2}$" }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["url", "retrieved", "covers"],
+        "properties": {
+          "url": { "type": "string", "pattern": "^https://" },
+          "retrieved": { "type": "string", "format": "date" },
+          "covers": { "type": "string" },
+          "authority": { "enum": ["manufacturer", "reseller", "third_party"] }
+        }
+      }
+    },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "kind": { "const": "builtin_device" } } },
+      "then": { "required": ["avd_device_id_candidates"], "properties": { "support_level": { "const": "full" } } }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "custom_hardware" } } },
+      "then": { "required": ["hardware", "sources"], "properties": { "support_level": { "const": "approximation" } } }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "viewport_preview" } } },
+      "then": { "required": ["hardware", "sources"], "properties": { "support_level": { "const": "viewport_only" } } }
+    }
+  ]
+}

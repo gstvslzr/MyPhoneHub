@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "id": "galaxy_s26_sized",
+  "display_name": "Galaxy S26-sized",
+  "family": "galaxy",
+  "kind": "custom_hardware",
+  "support_level": "approximation",
+  "label_note": "Galaxy-sized profile (stock Android, not One UI). Screen and RAM match the S26; software does not.",
+  "hardware": {
+    "screen_width_px": 1080,
+    "screen_height_px": 2340,
+    "screen_diagonal_in": 6.3,
+    "physical_ppi_stated": 411,
+    "ram_mb_device": 12288,
+    "cameras": { "back": true, "front": true },
+    "orientations": ["portrait", "landscape"]
+  },
+  "defaults": {
+    "image_variant": "google_apis_playstore",
+    "sdcard_mb": 512,
+    "gpu_mode": "auto",
+    "netspeed": "full",
+    "netdelay": "none"
+  },
+  "sources": [
+    { "url": "https://global.channelonline.com/acme/classic/Products/overview/M026544620", "retrieved": "2026-10-28", "covers": "2340x1080, 6.3 in, 411 ppi (SM-S942U1)", "authority": "reseller" },
+    { "url": "https://www.shidirect.com/product/51535146/Samsung-Galaxy-S26-5G-smartphone", "retrieved": "2026-10-28", "covers": "12 GB RAM, 2340x1080, 6.3 in", "authority": "reseller" },
+    { "url": "https://www.dateks.lv/en/cenas/viedtalruni/1391842-samsung-galaxy-s26-512gb-white", "retrieved": "2026-10-28", "covers": "1080x2340, 411 ppi, 12 GB RAM", "authority": "reseller" }
+  ],
+  "notes": [
+    "Emulator RAM is clamped to 8192 MB (official -memory range 1536-8192). Device RAM 12288 MB is kept for reference only.",
+    "CPU core count omitted: sources conflict (8-core vs 10-core listings) and emulator cores are a host allocation, not a device property.",
+    "Not sourced from samsung.com directly; re-verify before relying on values beyond screen-size approximation."
+  ]
+}

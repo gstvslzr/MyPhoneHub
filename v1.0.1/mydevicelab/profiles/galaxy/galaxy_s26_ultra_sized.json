@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "id": "galaxy_s26_ultra_sized",
+  "display_name": "Galaxy S26 Ultra-sized",
+  "family": "galaxy",
+  "kind": "custom_hardware",
+  "support_level": "approximation",
+  "label_note": "Galaxy-sized profile (stock Android, not One UI). Screen and RAM match the S26 Ultra; software and S Pen do not.",
+  "hardware": {
+    "screen_width_px": 1440,
+    "screen_height_px": 3120,
+    "screen_diagonal_in": 6.9,
+    "physical_ppi_stated": 499,
+    "ram_mb_device": 12288,
+    "cameras": { "back": true, "front": true },
+    "orientations": ["portrait", "landscape"]
+  },
+  "defaults": {
+    "image_variant": "google_apis_playstore",
+    "sdcard_mb": 512,
+    "gpu_mode": "auto",
+    "netspeed": "full",
+    "netdelay": "none"
+  },
+  "sources": [
+    { "url": "https://global.channelonline.com/acme/classic/Products/overview/M026544635", "retrieved": "2026-10-28", "covers": "3120x1440, 6.9 in, 499 ppi, 12 GB RAM", "authority": "reseller" },
+    { "url": "https://www.shi.com/product/51267831/Samsung-Galaxy-S26-Ultra", "retrieved": "2026-10-28", "covers": "12 GB RAM / 256 GB, 3120x1440, 6.9 in", "authority": "reseller" }
+  ],
+  "notes": [
+    "Emulator RAM is clamped to 8192 MB (official -memory range 1536-8192).",
+    "A 16 GB RAM variant is reported only with 1 TB storage (third-party listing, not verified with Samsung); profile uses 12 GB.",
+    "Not sourced from samsung.com directly; re-verify before relying on values beyond screen-size approximation."
+  ]
+}

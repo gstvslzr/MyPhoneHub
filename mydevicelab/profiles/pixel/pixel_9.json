@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "id": "pixel_9",
+  "display_name": "Pixel 9",
+  "family": "pixel",
+  "kind": "builtin_device",
+  "support_level": "full",
+  "label_note": "Uses Google's own device definition from the installed SDK.",
+  "avd_device_id_candidates": ["pixel_9"],
+  "defaults": {
+    "image_variant": "google_apis_playstore",
+    "sdcard_mb": 512,
+    "gpu_mode": "auto",
+    "netspeed": "full",
+    "netdelay": "none"
+  },
+  "notes": [
+    "Device id is not verified until runtime: the app checks 'avdmanager list device -c' and hides this profile if no candidate exists.",
+    "No hardware values are hardcoded; Google's definition is authoritative."
+  ]
+}

@@ -1,0 +1,35 @@
+# --- secrets / OPSEC ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.pfx
+*.p12
+*.kdbx
+id_rsa*
+id_ed25519*
+credentials.json
+secrets.json
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.vscode/
+.idea/
+# --- logs / temp ---
+*.log
+*.tmp
+# --- MyGitPublisher state ---
+.mypublish/
+# --- python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+build/
+dist/

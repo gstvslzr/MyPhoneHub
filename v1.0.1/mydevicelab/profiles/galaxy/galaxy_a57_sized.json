@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "id": "galaxy_a57_sized",
+  "display_name": "Galaxy A57-sized",
+  "family": "galaxy",
+  "kind": "custom_hardware",
+  "support_level": "approximation",
+  "label_note": "Galaxy-sized profile (stock Android, not One UI). Screen and RAM match the US A57 (SM-A576U); software does not.",
+  "hardware": {
+    "screen_width_px": 1080,
+    "screen_height_px": 2340,
+    "screen_diagonal_in": 6.7,
+    "ram_mb_device": 8192,
+    "cameras": { "back": true, "front": true },
+    "orientations": ["portrait", "landscape"]
+  },
+  "defaults": {
+    "image_variant": "google_apis_playstore",
+    "sdcard_mb": 512,
+    "gpu_mode": "auto",
+    "netspeed": "full",
+    "netdelay": "none"
+  },
+  "sources": [
+    { "url": "https://www.shidirect.com/product/51580341/Samsung-Galaxy-A57-5G-smartphone", "retrieved": "2026-10-28", "covers": "8 GB RAM, 2340x1080, 6.7 in (US SM-A576U)", "authority": "reseller" },
+    { "url": "https://www.91mobiles.com/samsung-galaxy-a57-price-in-india?ty=specs", "retrieved": "2026-10-28", "covers": "1080x2340, 6.7 in; RAM 8 or 12 GB (India)", "authority": "third_party" }
+  ],
+  "notes": [
+    "RAM varies by region: 8 GB (US listing), 8 or 12 GB (India listing). Profile uses the US 8 GB value.",
+    "No stated ppi from a retailer listing; the app computes it from resolution and diagonal.",
+    "Not sourced from samsung.com directly; re-verify before relying on values beyond screen-size approximation."
+  ]
+}

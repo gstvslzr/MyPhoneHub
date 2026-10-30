@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "id": "pixel_9_pro",
+  "display_name": "Pixel 9 Pro",
+  "family": "pixel",
+  "kind": "builtin_device",
+  "support_level": "full",
+  "label_note": "Uses Google's own device definition from the installed SDK.",
+  "avd_device_id_candidates": ["pixel_9_pro"],
+  "defaults": {
+    "image_variant": "google_apis_playstore",
+    "sdcard_mb": 512,
+    "gpu_mode": "auto",
+    "netspeed": "full",
+    "netdelay": "none"
+  },
+  "notes": [
+    "Device id is not verified until runtime: the app checks 'avdmanager list device -c' and hides this profile if no candidate exists."
+  ]
+}
